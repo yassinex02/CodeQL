@@ -7,8 +7,8 @@ app = Flask(__name__)
 def fetch_user(user_id):
     connection = sqlite3.connect('database.db')
     cursor = connection.cursor()
-    query = f"SELECT * FROM users WHERE id = '{user_id}';"
-    cursor.execute(query)
+    query = "SELECT * FROM users WHERE id = ?;"
+    cursor.execute(query, (user_id,))
     user = cursor.fetchone()
     connection.close()
     return user
@@ -28,4 +28,4 @@ def get_user():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
